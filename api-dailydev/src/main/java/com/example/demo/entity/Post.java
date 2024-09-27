@@ -14,15 +14,25 @@ import java.sql.Timestamp;
 @ToString
 @Builder
 @Entity
-@Table(name = "follow")
-public class Follow {
+@Table(name = "post")
+public class Post {
 
     @Id
     private long id;
 
-    private long followingUserId;
+    private String title;
 
-    private long followedUserId;
+    private String url;
+
+    private String description;
+
+    private long tag;
+
+    private  long userId;
+
+    private long squadId;
+
+    private Timestamp pubDate;
 
     private Timestamp createAt;
 }
