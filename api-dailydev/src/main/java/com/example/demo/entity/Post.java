@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -18,7 +16,8 @@ import java.sql.Timestamp;
 public class Post {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
 
@@ -26,11 +25,11 @@ public class Post {
 
     private String description;
 
-    private long tag;
+    private Long tag;
 
-    private  long userId;
+    private  Long userId;
 
-    private long squadId;
+    private Long squadId;
 
     private Timestamp pubDate;
 

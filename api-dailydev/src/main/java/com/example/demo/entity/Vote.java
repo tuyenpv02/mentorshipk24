@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -18,15 +16,16 @@ import java.sql.Timestamp;
 public class Vote {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private int type;
+    private Integer type;
 
-    private  long userId;
+    private  Long userId;
 
-    private long postId;
+    private Long postId;
 
-    private long commentId;
+    private Long commentId;
 
     private Timestamp createAt;
 }

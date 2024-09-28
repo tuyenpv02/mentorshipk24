@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -11,14 +9,13 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
-@Builder
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "account")
+public class Account {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String username;
 
@@ -26,6 +23,6 @@ public class User {
 
     private String email;
 
-    private Timestamp create;
+    private Timestamp createAt;
 
 }
