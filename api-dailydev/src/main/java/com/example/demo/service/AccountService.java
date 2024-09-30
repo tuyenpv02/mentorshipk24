@@ -15,14 +15,14 @@ public class AccountService {
     private AccountRepository repository;
 
     public List<Account> getAll() {
-        List<Account> ds = new ArrayList<>();
-        ds.stream().count();
         return repository.findAll();
     }
+
     public Account findById(Long id) {
         Optional<Account> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);
     }
+
     public Account add(Account user) {
         return repository.save(user);
     }

@@ -48,7 +48,7 @@ public class AccountController {
     public ResponseEntity<?> update(@PathVariable("id") Long id
             , @RequestBody Account user) {
         if (!service.existsById(id)) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     "Không tìm thấy"
             );
         }
