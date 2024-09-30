@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 public class AccountController {
 
     @Autowired
@@ -41,7 +41,6 @@ public class AccountController {
 
     @PostMapping("")
     public ResponseEntity<?> add(@RequestBody Account user) {
-        System.out.println("usser "+user);
         return ResponseEntity.ok(service.add(user));
     }
 
