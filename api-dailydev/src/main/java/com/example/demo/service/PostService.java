@@ -17,6 +17,16 @@ public class PostService {
     public List<Post> getAll() {
         return repository.findAll();
     }
+
+    public List<Post> getAllByUserId(Long userId) {
+        return repository.findAllByUserId(userId);
+    }
+
+    public List<Post> getAllBySquadId(Long squadId) {
+        return repository.findAllByUserId(squadId);
+    }
+
+
     public Post findById(Long id) {
         Optional<Post> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);
