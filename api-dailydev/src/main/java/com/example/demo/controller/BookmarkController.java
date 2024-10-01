@@ -42,7 +42,8 @@ public class BookmarkController {
                     "Không tìm thấy"
             );
         }
-
         return ResponseEntity.ok(service.update(id, bookmark));
     }
+
+
 }

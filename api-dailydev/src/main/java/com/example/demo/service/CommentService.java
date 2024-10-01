@@ -17,6 +17,7 @@ public class CommentService {
     public List<Comment> getAll() {
         return repository.findAll();
     }
+
     public Comment findById(Long id) {
         Optional<Comment> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);

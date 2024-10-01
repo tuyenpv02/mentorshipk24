@@ -21,7 +21,7 @@ public class Vote {
 
     private Integer type;
 
-    private  Long userId;
+    private Long userId;
 
     private Long postId;
 

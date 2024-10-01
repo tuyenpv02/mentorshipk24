@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Post;
 import com.example.demo.entity.Vote;
 import com.example.demo.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,19 @@ public class VoteService {
     public List<Vote> getAll() {
         return repository.findAll();
     }
+
+    public List<Vote> getAllByUserId(Long userId) {
+        return repository.findAllByUserId(userId);
+    }
+
+    public List<Vote> getAllByPostId(Long postId) {
+        return repository.findAllByPostId(postId);
+    }
+
+    public List<Vote> getAllByCommentId(Long commentId) {
+        return repository.findAllByPostId(commentId);
+    }
+
     public Vote findById(Long id) {
         Optional<Vote> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);

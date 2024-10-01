@@ -19,16 +19,6 @@ public class CommentController {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {
-        if (!service.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    "Không tìm thấy"
-            );
-        }
-        return ResponseEntity.ok(service.findById(id));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
         if (!service.existsById(id)) {
