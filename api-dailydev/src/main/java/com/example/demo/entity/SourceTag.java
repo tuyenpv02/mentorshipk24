@@ -1,7 +1,10 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
@@ -10,26 +13,16 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
-@Table(name = "post")
-public class Post {
+@Table(name = "source_tag")
+public class SourceTag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private Long tagId;
 
-    private String url;
-
-    private String description;
-
-    private Long tag;
-
-    private  Long userId;
-
-    private Long squadId;
-
-    private Timestamp pubDate;
+    private Long sourceId;
 
     private Timestamp createAt;
 }
