@@ -19,9 +19,9 @@ public class Follow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long followingUserId;
+    private Long userId;
 
-    private Long followedUserId;
+    private Long followId;
 
     private Timestamp createAt;
 }

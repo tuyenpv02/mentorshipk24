@@ -1,22 +1,27 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Bookmark;
-import com.example.demo.service.BookmarkService;
+import com.example.demo.entity.Follow;
+import com.example.demo.service.FollowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/bookmarks")
-public class BookmarkController {
+@RequestMapping("/follows")
+public class FollowController {
 
     @Autowired
-    BookmarkService service;
+    FollowService service;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> getAllByUserId(@PathVariable("userId")Long userId) {
-        return ResponseEntity.ok(service.getAllByUserId(userId));
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getAllUser(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(service.getAllUser(id));
+    }
+
+    @GetMapping("/follow/{id}")
+    public ResponseEntity<?> getAllFollow(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(service.getAllFollow(id));
     }
 
     @DeleteMapping("/{id}")
@@ -30,8 +35,8 @@ public class BookmarkController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> add(@RequestBody Bookmark bookmark) {
-        return ResponseEntity.ok(service.add(bookmark));
+    public ResponseEntity<?> add(@RequestBody Follow Follow) {
+        return ResponseEntity.ok(service.add(Follow));
     }
 
 }
