@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,17 +20,15 @@ public class Post {
 
     private String title;
 
-    private String url;
+    private String link;
 
+    @Lob
     private String description;
 
-    private Long tag;
+    private LocalDateTime pubDate;
 
     private  Long userId;
 
     private Long squadId;
 
-    private Timestamp pubDate;
-
-    private Timestamp createAt;
 }

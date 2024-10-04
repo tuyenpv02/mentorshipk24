@@ -40,8 +40,7 @@ public class PostService {
         return optional.map(o -> {
             o.setTitle(newPost.getTitle());
             o.setDescription(newPost.getDescription());
-            o.setTag(newPost.getTag());
-            o.setUrl(newPost.getUrl());
+            o.setLink(newPost.getLink());
             return repository.save(o);
         }).orElse(null);
     }

@@ -14,23 +14,17 @@ import java.sql.Timestamp;
 @Setter
 @Entity
 @Table(name = "rss")
-public class Rss {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String name;
 
     private String link;
 
-    private Long tag;
-
-    private Long userId;
-
     private Long sourceId;
-
-    private Timestamp pubDate;
 
     private Timestamp createAt;
 }
