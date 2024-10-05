@@ -24,6 +24,10 @@ public class PostController {
         return ResponseEntity.ok(service.getAllByUserId(id));
     }
 
+    @GetMapping("/category/{id}")
+    public ResponseEntity<?> getAllByCategoryId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getAllByCategoryId(id));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {

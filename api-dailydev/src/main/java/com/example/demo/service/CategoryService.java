@@ -27,6 +27,9 @@ public class CategoryService {
     private PostService postService;
 
     public String fetchRss(Category rss) {
+
+        Category category = repository.save(rss);
+
         URL feedUrl = null;
         try {
             feedUrl = new URL(rss.getLink());
@@ -38,6 +41,7 @@ public class CategoryService {
                 post.setLink(entry.getLink());
                 post.setDescription(entry.getDescription().getValue());
                 post.setPubDate(LocalDateTime.now());
+                post.setCategory(category);
 
                 postService.add(post);
             }
