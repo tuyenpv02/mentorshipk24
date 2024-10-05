@@ -29,6 +29,4 @@ public class Post {
 
     private  Long userId;
 
-    private Long squadId;
-
 }

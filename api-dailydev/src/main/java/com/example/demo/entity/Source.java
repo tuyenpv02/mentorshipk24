@@ -24,10 +24,6 @@ public class Source {
 
     private String url;
 
-    private Long userId;
-
-    private Timestamp pubDate;
-
     private Timestamp createAt;
 
 }

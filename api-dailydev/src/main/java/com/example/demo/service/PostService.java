@@ -22,9 +22,9 @@ public class PostService {
         return repository.findAllByUserId(userId);
     }
 
-    public List<Post> getAllBySquadId(Long squadId) {
-        return repository.findAllByUserId(squadId);
-    }
+//    public List<Post> getAllBySquadId(Long squadId) {
+//        return repository.findAllByUserId(squadId);
+//    }
 
 
     public Post findById(Long id) {

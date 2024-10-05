@@ -24,10 +24,6 @@ public class PostController {
         return ResponseEntity.ok(service.getAllByUserId(id));
     }
 
-    @GetMapping("/squad/{squadId}")
-    public ResponseEntity<?> getAllBySquadId(@PathVariable(name = "squadId") Long id) {
-        return ResponseEntity.ok(service.getAllBySquadId(id));
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {

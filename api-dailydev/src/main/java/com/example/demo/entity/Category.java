@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
-@Table(name = "rss")
+@Table(name = "category")
 public class Category {
 
     @Id

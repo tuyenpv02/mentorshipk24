@@ -21,8 +21,6 @@ public class Account {
 
     private String password;
 
-    private String email;
-
     private Timestamp createAt;
 
 }
