@@ -14,7 +14,7 @@ public class FollowTagService {
     @Autowired
     private FollowTagRepository repository;
 
-    //    Lấy danh sách người được theo dõi của user
+    //    Lấy danh sách tag được theo dõi của user
     public List<FollowTag> getAllTagByUserId(Long userId) {
         return repository.findAllByUserId(userId);
     }
