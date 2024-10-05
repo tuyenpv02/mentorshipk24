@@ -24,7 +24,9 @@ public class Category {
 
     private String link;
 
-    private Long sourceId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "source_id")
+    private Source source;
 
     private Timestamp createAt;
 }

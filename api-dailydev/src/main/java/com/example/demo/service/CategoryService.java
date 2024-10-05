@@ -3,9 +3,11 @@ package com.example.demo.service;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.entity.Post;
 import com.example.demo.entity.Category;
+import com.example.demo.entity.Source;
 import com.example.demo.repository.CategoryRepository;
 
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -43,6 +45,40 @@ public class CategoryService {
             e.printStackTrace();
         }
         return "ok";
+    }
+
+    public List<Category> getAll() {
+        return repository.findAll();
+    }
+    public Category findById(Long id) {
+        Optional<Category> optional = repository.findById(id);
+        return optional.map(o -> o).orElse(null);
+    }
+
+    public Category add(Category category) {
+        return repository.save(category);
+    }
+
+    public Category update(Long id, Category newCategory) {
+        Optional<Category> optional = repository.findById(id);
+        return optional.map(o -> {
+            o.setName(newCategory.getName());
+            o.setLink(newCategory.getLink());
+            o.setSource(Source.builder().id(newCategory.getSource().getId()).build());
+            return repository.save(o);
+        }).orElse(null);
+    }
+
+    public Category deleteById(Long id) {
+        Optional<Category> optional = repository.findById(id);
+        return optional.map(o -> {
+            repository.delete(o);
+            return o;
+        }).orElse(null);
+    }
+
+    public Boolean existsById(Long id) {
+        return repository.existsById(id);
     }
 
 }

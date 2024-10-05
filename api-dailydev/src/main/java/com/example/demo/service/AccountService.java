@@ -31,7 +31,6 @@ public class AccountService {
         Optional<Account> optional = repository.findById(id);
         return optional.map(o -> {
             o.setUsername(newUser.getUsername());
-            o.setEmail(newUser.getEmail());
             o.setPassword(newUser.getPassword());
             return repository.save(o);
         }).orElse(null);

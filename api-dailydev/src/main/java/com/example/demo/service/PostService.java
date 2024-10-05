@@ -19,20 +19,17 @@ public class PostService {
     }
 
     public List<Post> getAllByUserId(Long userId) {
-        return repository.findAllByUserId(userId);
+        return repository.findAllByAccount_Id(userId);
     }
-
-//    public List<Post> getAllBySquadId(Long squadId) {
-//        return repository.findAllByUserId(squadId);
-//    }
-
 
     public Post findById(Long id) {
         Optional<Post> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);
     }
-    public Post add(Post Post) {
-        return repository.save(Post);
+    public Post add(Post post) {
+        System.out.println(post);
+        System.out.println(post);
+        return repository.save(post);
     }
 
     public Post update(Long id, Post newPost) {
