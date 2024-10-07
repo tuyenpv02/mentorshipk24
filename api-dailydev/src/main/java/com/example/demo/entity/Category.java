@@ -25,9 +25,9 @@ public class Category {
 
     private String link;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "source_id")
-    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name = "source_id", referencedColumnName = "id")
+//    @JsonIgnore
     private Source source;
 
     private Timestamp createAt;

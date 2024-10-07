@@ -27,8 +27,10 @@ public class CategoryService {
     private PostService postService;
 
     public String fetchRss(Category rss) {
-
-        Category category = repository.save(rss);
+        Optional<Category> optional = repository.findByName(rss.getName());
+        if(optional.isEmpty()){
+            return "không tìm thấy category";
+        }
 
         URL feedUrl = null;
         try {
@@ -41,7 +43,7 @@ public class CategoryService {
                 post.setLink(entry.getLink());
                 post.setDescription(entry.getDescription().getValue());
                 post.setPubDate(LocalDateTime.now());
-                post.setCategory(category);
+                post.setCategory(optional.get());
 
                 postService.add(post);
             }

@@ -15,10 +15,10 @@ public class CategoryController {
     @Autowired
     CategoryService service;
 
-    @PostMapping("/fetch")
-    public ResponseEntity<?> fetch(@RequestBody Category rss) {
-        return ResponseEntity.ok(service.fetchRss(rss));
-    }
+//    @PostMapping("/fetch")
+//    public ResponseEntity<?> fetch(@RequestBody Category rss) {
+//        return ResponseEntity.ok(service.fetchRss(rss));
+//    }
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {
