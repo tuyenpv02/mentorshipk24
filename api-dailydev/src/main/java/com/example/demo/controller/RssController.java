@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.RssRequest;
 import com.example.demo.entity.Category;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.RssService;
@@ -17,14 +18,19 @@ public class RssController {
     @Autowired
     CategoryService service;
 
-    @PostMapping("/fetch")
-    public ResponseEntity<?> fetch(@RequestBody Category rss) {
-        return ResponseEntity.ok(service.fetchRss(rss));
+//    @PostMapping("/fetch-category")
+//    public ResponseEntity<?> fetchRssCategory(@RequestBody Category rss) {
+//        return ResponseEntity.ok(service.fetchRss(rss));
+//    }
+
+    @PostMapping("/fetch-request")
+    public ResponseEntity<?> fetchRssUrl(@RequestBody RssRequest rssRequest) {
+        return ResponseEntity.ok(rssService.fetchRss(rssRequest));
     }
 
-    @PostMapping("/fetch-category")
-    public ResponseEntity<?> fetch(@RequestParam String url) {
-        rssService.scraper(url);
-        return ResponseEntity.ok("");
+    @PostMapping("/read-source")
+    public ResponseEntity<?> fetchSource(@RequestParam String url) {
+
+        return ResponseEntity.ok(rssService.readSource(url));
     }
 }
