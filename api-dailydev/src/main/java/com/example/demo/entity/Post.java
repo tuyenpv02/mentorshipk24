@@ -24,6 +24,8 @@ public class Post {
 
     private String link;
 
+    private String guId;
+
     @Lob
     private String description;
 

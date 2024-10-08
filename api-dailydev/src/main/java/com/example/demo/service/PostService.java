@@ -31,6 +31,11 @@ public class PostService {
         return optional.map(o -> o).orElse(null);
     }
 
+    public Post findByGuId(String guId) {
+        Optional<Post> optional = repository.findByGuId(guId);
+        return optional.map(o -> o).orElse(null);
+    }
+
     public Post findByLink(String link) {
         List<Post> optional = repository.findByLink(link);
         if (optional.size() > 0) {

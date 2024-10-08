@@ -20,6 +20,7 @@ import org.jsoup.select.Elements;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,19 +36,19 @@ public class RssService {
     @Autowired
     private SourceRepository sourceRepository;
 
-    @Scheduled(fixedDelay = 60*1000)
+    @Scheduled(fixedDelay = 60 * 1000)
     public void scheduleFixedDelayTask() {
-        RssRequest rssRequest = new RssRequest("https://cdn.24h.com.vn/upload/rss/dulich24h.rss","du lịch");
-        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60*1000));
+        RssRequest rssRequest = new RssRequest("https://cdn.24h.com.vn/upload/rss/dulich24h.rss", "du lịch");
+        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60 * 1000));
         fetchRss(rssRequest);
     }
 
-    public boolean readSource(String url){
+    public List<Category> readSource(String url) {
         Source source = sourceRepository.findByUrl(url);
-        if(source == null){
+        if (source == null) {
             source = sourceRepository.save(Source.builder().url(url).build());
         }
-
+        List<Category> lsCategories = new ArrayList<>();
         try {
             // https://www.24h.com.vn/guest/RSS/
 
@@ -65,22 +66,25 @@ public class RssService {
                 // Lấy liên kết RSS từ cột thứ hai (td thứ hai)
                 String link = rssItem.select("td a").attr("href");
 
-                if(categoryRepository.findByName(category).isEmpty()){
-                    categoryRepository.save(Category.builder().name(category).source(source).link(link).build());
+                Optional<Category> newCategory = categoryRepository.findByName(category);
+                if (newCategory.isEmpty() && newCategory.get().getSource().getId() == source.getId()) {
+                    lsCategories.add(categoryRepository.save(Category.builder().name(category).source(source).link(link).build()));
+                    continue;
                 }
+                lsCategories.add(newCategory.get());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return lsCategories;
     }
 
     public String fetchRss(RssRequest rssRequest) {
         Optional<Category> optional = categoryRepository.findByName(rssRequest.getCategoryName());
-        if(optional.isEmpty()){
-            return "không tìm thấy category";
-        }
+//        if(optional.isEmpty()){
+//            return "không tìm thấy category";
+//        }
 
         URL feedUrl = null;
         try {
@@ -88,11 +92,13 @@ public class RssService {
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed feed = input.build(new XmlReader(feedUrl));
             for (SyndEntry entry : (List<SyndEntry>) feed.getEntries()) {
+
                 // kiểm tra
-                if(postService.findByLink(entry.getLink()) == null){
+                if (postService.findByGuId(entry.getUri()) == null) {
                     Post post = new Post();
                     post.setTitle(entry.getTitle());
                     post.setLink(entry.getLink());
+                    post.setGuId(entry.getUri());
                     post.setDescription(entry.getDescription().getValue());
                     post.setPubDate(LocalDateTime.now());
                     post.setCategory(Category.builder().id(optional.get().getId()).build());
