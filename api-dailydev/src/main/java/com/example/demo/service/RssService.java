@@ -38,7 +38,7 @@ public class RssService {
     @Scheduled(fixedDelay = 60*1000)
     public void scheduleFixedDelayTask() {
         RssRequest rssRequest = new RssRequest("https://cdn.24h.com.vn/upload/rss/dulich24h.rss","du lịch");
-        System.out.println("Fixed delay task - " + System.currentTimeMillis() / 1000);
+        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60*1000));
         fetchRss(rssRequest);
     }
 
@@ -88,14 +88,17 @@ public class RssService {
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed feed = input.build(new XmlReader(feedUrl));
             for (SyndEntry entry : (List<SyndEntry>) feed.getEntries()) {
-                Post post = new Post();
-                post.setTitle(entry.getTitle());
-                post.setLink(entry.getLink());
-                post.setDescription(entry.getDescription().getValue());
-                post.setPubDate(LocalDateTime.now());
-                post.setCategory(Category.builder().id(optional.get().getId()).build());
+                // kiểm tra
+                if(postService.findByLink(entry.getLink()) == null){
+                    Post post = new Post();
+                    post.setTitle(entry.getTitle());
+                    post.setLink(entry.getLink());
+                    post.setDescription(entry.getDescription().getValue());
+                    post.setPubDate(LocalDateTime.now());
+                    post.setCategory(Category.builder().id(optional.get().getId()).build());
 
-                postService.add(post);
+                    postService.add(post);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

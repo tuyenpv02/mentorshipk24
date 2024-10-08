@@ -21,15 +21,30 @@ public class PostService {
     public List<Post> getAllByUserId(Long userId) {
         return repository.findAllByAccount_Id(userId);
     }
+
     public List<Post> getAllByCategoryId(Long cateId) {
         return repository.findAllByCategory_Id(cateId);
     }
 
+    public Post findByName(String name) {
+        Optional<Post> optional = repository.findByTitle(name);
+        return optional.map(o -> o).orElse(null);
+    }
+
+    public Post findByLink(String link) {
+        List<Post> optional = repository.findByLink(link);
+        if (optional.size() > 0) {
+            return optional.get(0);
+
+        }
+        return null;
+    }
 
     public Post findById(Long id) {
         Optional<Post> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);
     }
+
     public Post add(Post post) {
         return repository.save(post);
     }
