@@ -13,5 +13,6 @@ public class RssRequest {
 
     private String url;
 
-    private String categoryName;
+//    private String categoryName;
+    private Long categoryId;
 }

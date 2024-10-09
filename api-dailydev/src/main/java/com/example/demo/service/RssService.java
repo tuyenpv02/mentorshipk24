@@ -38,8 +38,8 @@ public class RssService {
 
     @Scheduled(fixedDelay = 60 * 1000)
     public void scheduleFixedDelayTask() {
-        RssRequest rssRequest = new RssRequest("https://cdn.24h.com.vn/upload/rss/dulich24h.rss", "du lịch");
-        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60 * 1000));
+        RssRequest rssRequest = new RssRequest("https://cdn.24h.com.vn/upload/rss/dulich24h.rss", 3L);
+//        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60 * 1000));
         fetchRss(rssRequest);
     }
 
@@ -66,7 +66,7 @@ public class RssService {
                 // Lấy liên kết RSS từ cột thứ hai (td thứ hai)
                 String link = rssItem.select("td a").attr("href");
 
-                Optional<Category> newCategory = categoryRepository.findByName(category);
+                Optional<Category> newCategory = categoryRepository.findByNameAndSource(category, source);
                 if (newCategory.isEmpty() && newCategory.get().getSource().getId() == source.getId()) {
                     lsCategories.add(categoryRepository.save(Category.builder().name(category).source(source).link(link).build()));
                     continue;
@@ -81,10 +81,10 @@ public class RssService {
     }
 
     public String fetchRss(RssRequest rssRequest) {
-        Optional<Category> optional = categoryRepository.findByName(rssRequest.getCategoryName());
-//        if(optional.isEmpty()){
-//            return "không tìm thấy category";
-//        }
+        Optional<Category> optional = categoryRepository.findById(rssRequest.getCategoryId());
+        if(optional.isEmpty()){
+            return "không tìm thấy category";
+        }
 
         URL feedUrl = null;
         try {
