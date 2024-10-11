@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -17,7 +18,7 @@ public class FollowTag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private  Long userId;
+    private Long userId;
 
     private Long tagId;
 

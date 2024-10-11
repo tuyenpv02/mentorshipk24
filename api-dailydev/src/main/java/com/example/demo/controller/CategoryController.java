@@ -25,6 +25,12 @@ public class CategoryController {
         return ResponseEntity.ok(service.getAll());
     }
 
+    @GetMapping("/source")
+    public ResponseEntity<?> getAllSource(@RequestParam("sourceId")Long sourceId) {
+        return ResponseEntity.ok(service.getAllBySource(sourceId));
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {
         if (!service.existsById(id)) {

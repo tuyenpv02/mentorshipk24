@@ -56,6 +56,12 @@ public class CategoryService {
     public List<Category> getAll() {
         return repository.findAll();
     }
+
+    public List<Category> getAllBySource(Long sourceId) {
+        Source source = Source.builder().id(sourceId).build();
+        return repository.findAllBySource(source);
+    }
+
     public Category findById(Long id) {
         Optional<Category> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);

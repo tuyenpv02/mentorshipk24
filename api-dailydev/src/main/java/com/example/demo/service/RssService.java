@@ -36,7 +36,7 @@ public class RssService {
     @Autowired
     private SourceRepository sourceRepository;
 
-    @Scheduled(fixedDelay = 60 * 1000)
+    @Scheduled(fixedDelay = 10 * 60 * 1000)
     public void scheduleFixedDelayTask() {
         RssRequest rssRequest = new RssRequest("https://cdn.24h.com.vn/upload/rss/dulich24h.rss", 3L);
 //        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60 * 1000));
@@ -82,7 +82,7 @@ public class RssService {
 
     public String fetchRss(RssRequest rssRequest) {
         Optional<Category> optional = categoryRepository.findById(rssRequest.getCategoryId());
-        if(optional.isEmpty()){
+        if (optional.isEmpty()) {
             return "không tìm thấy category";
         }
 
@@ -93,7 +93,6 @@ public class RssService {
             SyndFeed feed = input.build(new XmlReader(feedUrl));
             for (SyndEntry entry : (List<SyndEntry>) feed.getEntries()) {
 
-                // kiểm tra
                 if (postService.findByGuId(entry.getUri()) == null) {
                     Post post = new Post();
                     post.setTitle(entry.getTitle());
