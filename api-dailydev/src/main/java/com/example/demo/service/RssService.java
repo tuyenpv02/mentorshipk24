@@ -67,7 +67,7 @@ public class RssService {
                 String link = rssItem.select("td a").attr("href");
 
                 Optional<Category> newCategory = categoryRepository.findByNameAndSource(category, source);
-                if (newCategory.isEmpty() && newCategory.get().getSource().getId() == source.getId()) {
+                if (newCategory.isEmpty() ) {
                     lsCategories.add(categoryRepository.save(Category.builder().name(category).source(source).link(link).build()));
                     continue;
                 }

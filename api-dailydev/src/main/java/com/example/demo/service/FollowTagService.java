@@ -16,7 +16,7 @@ public class FollowTagService {
 
     //    Lấy danh sách tag được theo dõi của user
     public List<FollowTag> getAllTagByUserId(Long userId) {
-        return repository.findAllByUserId(userId);
+        return repository.findAllByAccount_Id(userId);
     }
 
     public FollowTag add(FollowTag FollowTag) {

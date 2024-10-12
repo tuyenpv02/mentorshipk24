@@ -17,7 +17,7 @@ public class BookmarkService {
     private BookmarkRepository repository;
 
     public List<Bookmark> getAllByUserId(Long userId) {
-        return repository.findAllByUserId(userId);
+        return repository.findAllByAccount_Id(userId);
     }
     public Bookmark findById(Long id) {
         Optional<Bookmark> optional = repository.findById(id);

@@ -23,7 +23,7 @@ public class PostTag {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "tang_id", referencedColumnName = "id")
+    @JoinColumn(name = "tag_id", referencedColumnName = "id")
     private Tag tag;
 
     private Timestamp createAt;

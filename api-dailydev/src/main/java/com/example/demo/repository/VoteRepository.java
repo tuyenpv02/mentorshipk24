@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
 
-    List<Vote> findAllByUserId(Long userId);
+    List<Vote> findAllByAccount_Id(Long userId);
     List<Vote> findAllByPostId(Long postId);
     List<Vote> findAllByCommentId(Long commentId);
 

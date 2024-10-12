@@ -10,5 +10,5 @@ import java.util.List;
 public interface FollowTagRepository extends JpaRepository<FollowTag, Long> {
 
 
-    List<FollowTag> findAllByUserId(Long userId);
+    List<FollowTag> findAllByAccount_Id(Long userId);
 }

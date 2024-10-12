@@ -21,8 +21,8 @@ public class VoteService {
         return repository.findAll();
     }
 
-    public List<Vote> getAllByUserId(Long userId) {
-        return repository.findAllByUserId(userId);
+    public List<Vote> getAllByAccountId(Long userId) {
+        return repository.findAllByAccount_Id(userId);
     }
 
     public List<Vote> getAllByPostId(Long postId) {
