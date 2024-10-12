@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Account;
+import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
 import com.example.demo.entity.Vote;
 import com.example.demo.repository.VoteRepository;
@@ -43,9 +45,9 @@ public class VoteService {
         Optional<Vote> optional = repository.findById(id);
         return optional.map(o -> {
             o.setType(newVote.getType());
-            o.setUserId(newVote.getUserId());
-            o.setPostId(newVote.getPostId());
-            o.setCommentId(newVote.getCommentId());
+            o.setAccount(Account.builder().id(newVote.getAccount().getId()).build());
+            o.setPost(Post.builder().id(newVote.getPost().getId()).build());
+            o.setComment(Comment.builder().id(newVote.getComment().getId()).build());
             return repository.save(o);
         }).orElse(null);
     }

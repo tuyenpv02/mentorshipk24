@@ -21,9 +21,13 @@ public class Comment {
 
     private String description;
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
 
-    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private Post post;
 
     private Timestamp createAt;
 }

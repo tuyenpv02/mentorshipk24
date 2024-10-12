@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Account;
 import com.example.demo.entity.Bookmark;
+import com.example.demo.entity.Post;
 import com.example.demo.repository.BookmarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +30,8 @@ public class BookmarkService {
     public Bookmark update(Long id, Bookmark newBookmark) {
         Optional<Bookmark> optional = repository.findById(id);
         return optional.map(o -> {
-            o.setPostId(newBookmark.getPostId());
-            o.setUserId(newBookmark.getUserId());
+            o.setPost(Post.builder().id(newBookmark.getPost().getId()).build());
+            o.setAccount(Account.builder().id(newBookmark.getAccount().getId()).build());
             return repository.save(o);
         }).orElse(null);
     }

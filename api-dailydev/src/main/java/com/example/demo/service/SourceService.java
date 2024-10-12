@@ -16,12 +16,12 @@ public class SourceService {
     @Autowired
     private SourceRepository repository;
 
-    public Source add(Source source) {
-        return repository.save(source);
-    }
-
     public List<Source> getAll() {
         return repository.findAll();
+    }
+
+    public Source add(Source source) {
+        return repository.save(source);
     }
 
     public Source update(Long id, Source newSource) {

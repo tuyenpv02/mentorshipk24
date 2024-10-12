@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString
@@ -17,9 +18,13 @@ public class PostTag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private Post post;
 
-    private Long tagId;
+    @ManyToOne
+    @JoinColumn(name = "tang_id", referencedColumnName = "id")
+    private Tag tag;
 
     private Timestamp createAt;
 }

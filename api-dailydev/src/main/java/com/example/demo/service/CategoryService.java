@@ -23,36 +23,6 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repository;
 
-    @Autowired
-    private PostService postService;
-
-//    public String fetchRss(Category rss) {
-//        Optional<Category> optional = repository.findByName(rss.getName());
-//        if(optional.isEmpty()){
-//            return "không tìm thấy category";
-//        }
-//
-//        URL feedUrl = null;
-//        try {
-//            feedUrl = new URL(rss.getLink());
-//            SyndFeedInput input = new SyndFeedInput();
-//            SyndFeed feed = input.build(new XmlReader(feedUrl));
-//            for (SyndEntry entry : (List<SyndEntry>) feed.getEntries()) {
-//                Post post = new Post();
-//                post.setTitle(entry.getTitle());
-//                post.setLink(entry.getLink());
-//                post.setDescription(entry.getDescription().getValue());
-//                post.setPubDate(LocalDateTime.now());
-//                post.setCategory(optional.get());
-//
-//                postService.add(post);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return "ok";
-//    }
-
     public List<Category> getAll() {
         return repository.findAll();
     }

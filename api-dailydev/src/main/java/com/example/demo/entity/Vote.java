@@ -21,11 +21,17 @@ public class Vote {
 
     private Integer type;
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
 
-    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private Post post;
 
-    private Long commentId;
+    @ManyToOne
+    @JoinColumn(name = "comment_id", referencedColumnName = "id")
+    private Comment comment;
 
     private Timestamp createAt;
 }

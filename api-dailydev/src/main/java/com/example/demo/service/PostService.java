@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Account;
+import com.example.demo.entity.Category;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,8 @@ public class PostService {
             o.setTitle(newPost.getTitle());
             o.setDescription(newPost.getDescription());
             o.setLink(newPost.getLink());
+            o.setCategory(Category.builder().id(newPost.getCategory().getId()).build());
+            o.setAccount(Account.builder().id(newPost.getAccount().getId()).build());
             return repository.save(o);
         }).orElse(null);
     }

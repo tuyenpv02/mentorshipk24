@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString
@@ -18,9 +19,13 @@ public class FollowTag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
 
-    private Long tagId;
+    @ManyToOne
+    @JoinColumn(name = "tag_id", referencedColumnName = "id")
+    private Tag tag;
 
     private Timestamp createAt;
 }

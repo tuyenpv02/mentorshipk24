@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Account;
 import com.example.demo.entity.Comment;
+import com.example.demo.entity.Post;
 import com.example.demo.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +32,8 @@ public class CommentService {
         Optional<Comment> optional = repository.findById(id);
         return optional.map(o -> {
             o.setDescription(newComment.getDescription());
-            o.setPostId(newComment.getPostId());
-            o.setUserId(newComment.getUserId());
+            o.setPost(Post.builder().id(newComment.getPost().getId()).build());
+            o.setAccount(Account.builder().id(newComment.getAccount().getId()).build());
             return repository.save(o);
         }).orElse(null);
     }
