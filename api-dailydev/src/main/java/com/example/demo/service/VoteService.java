@@ -21,8 +21,12 @@ public class VoteService {
         return repository.findAll();
     }
 
+    public List<Vote> getAllVoteByTyoe(Integer type) {
+        return repository.findAllByType(type);
+    }
+
     public List<Vote> getAllByAccountId(Long userId) {
-        return repository.findAllByAccount_Id(userId);
+        return repository.findAllByAccountId(userId);
     }
 
     public List<Vote> getAllByPostId(Long postId) {
@@ -37,6 +41,7 @@ public class VoteService {
         Optional<Vote> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);
     }
+
     public Vote add(Vote Vote) {
         return repository.save(Vote);
     }

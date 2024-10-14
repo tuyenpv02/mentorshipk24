@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.FollowTag;
+import com.example.demo.entity.Post;
 import com.example.demo.entity.PostTag;
+import com.example.demo.entity.Tag;
 import com.example.demo.repository.FollowTagRepository;
 import com.example.demo.repository.PostTagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,13 @@ public class PostTagService {
     @Autowired
     private PostTagRepository repository;
 
-    public List<PostTag> getAll() {
-        return repository.findAll();
+
+    public List<PostTag> getAllPostTagByByPost(Post post) {
+        return repository.findAllByPostId(post.getId());
+    }
+
+    public List<PostTag> getAllPostTagByByTag(Tag tag) {
+        return repository.findAllByTagId(tag.getId());
     }
 
     public PostTag add(PostTag postTag) {

@@ -11,4 +11,7 @@ public interface FollowTagRepository extends JpaRepository<FollowTag, Long> {
 
 
     List<FollowTag> findAllByAccount_Id(Long userId);
+
+    List<FollowTag> findAllByTag_Id(Long tagId);
+
 }

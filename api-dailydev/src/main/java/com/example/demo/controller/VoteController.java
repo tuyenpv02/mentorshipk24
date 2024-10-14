@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Account;
+import com.example.demo.entity.Post;
 import com.example.demo.entity.Vote;
 import com.example.demo.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,21 @@ public class VoteController {
 
     @Autowired
     VoteService service;
+
+    @GetMapping("/type")
+    public ResponseEntity<?> getAllByType(@RequestParam("type") Integer type) {
+        return ResponseEntity.ok(service.getAllVoteByTyoe(type));
+    }
+
+    @GetMapping("/account")
+    public ResponseEntity<?> getAllByAccount(@RequestBody Account account) {
+        return ResponseEntity.ok(service.getAllByAccountId(account.getId()));
+    }
+
+    @GetMapping("/post")
+    public ResponseEntity<?> getAllByAccount(@RequestBody Post post) {
+        return ResponseEntity.ok(service.getAllByPostId(post.getId()));
+    }
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {

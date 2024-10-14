@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Post;
 import com.example.demo.entity.PostTag;
 import com.example.demo.entity.Source;
+import com.example.demo.entity.Tag;
 import com.example.demo.service.PostTagService;
 import com.example.demo.service.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,16 @@ public class PostTagController {
     @GetMapping("")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(service.getAll());
+    }
+
+    @GetMapping("/post")
+    public ResponseEntity<?> getAllPostTagByPost(@RequestBody Post post) {
+        return ResponseEntity.ok(service.getAllPostTagByByPost(post));
+    }
+
+    @GetMapping("/tag")
+    public ResponseEntity<?> getAllPostTagByTag(@RequestBody Tag tag) {
+        return ResponseEntity.ok(service.getAllPostTagByByTag(tag));
     }
 
     @PostMapping("")
