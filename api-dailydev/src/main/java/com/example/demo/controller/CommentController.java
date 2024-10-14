@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Comment;
+import com.example.demo.entity.Post;
 import com.example.demo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,12 @@ public class CommentController {
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
+
+    @GetMapping("/post")
+    public ResponseEntity<?> getAllByPost(@RequestBody Post post) {
+        return ResponseEntity.ok(service.getAllByPost(post));
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {

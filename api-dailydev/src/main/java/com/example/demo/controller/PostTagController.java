@@ -18,11 +18,6 @@ public class PostTagController {
     @Autowired
     PostTagService service;
 
-    @GetMapping("")
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(service.getAll());
-    }
-
     @GetMapping("/post")
     public ResponseEntity<?> getAllPostTagByPost(@RequestBody Post post) {
         return ResponseEntity.ok(service.getAllPostTagByByPost(post));
