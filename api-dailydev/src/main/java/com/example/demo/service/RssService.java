@@ -36,11 +36,14 @@ public class RssService {
     @Autowired
     private SourceRepository sourceRepository;
 
-    @Scheduled(fixedDelay = 10 * 60 * 1000)
+    @Scheduled(fixedDelay = 60 * 60 * 1000)
     public void scheduleFixedDelayTask() {
-        RssRequest rssRequest = new RssRequest("https://cdn.24h.com.vn/upload/rss/dulich24h.rss", 3L);
+        List<Category> categories = categoryRepository.findAll();
+        categories.forEach(o -> {
+            RssRequest rssRequest = new RssRequest(o.getLink(), o.getSource().getId());
+            fetchRss(rssRequest);
+        });
 //        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60 * 1000));
-        fetchRss(rssRequest);
     }
 
     public List<Category> readSource(String url) {
@@ -67,7 +70,7 @@ public class RssService {
                 String link = rssItem.select("td a").attr("href");
 
                 Optional<Category> newCategory = categoryRepository.findByNameAndSource(category, source);
-                if (newCategory.isEmpty() ) {
+                if (newCategory.isEmpty()) {
                     lsCategories.add(categoryRepository.save(Category.builder().name(category).source(source).link(link).build()));
                     continue;
                 }
