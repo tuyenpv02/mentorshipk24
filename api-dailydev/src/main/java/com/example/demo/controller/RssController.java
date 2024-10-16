@@ -25,7 +25,11 @@ public class RssController {
 
     @PostMapping("/fetch-request")
     public ResponseEntity<?> fetchRssUrl(@RequestBody RssRequest rssRequest) {
-        return ResponseEntity.ok(rssService.fetchRss(rssRequest));
+        try {
+            return ResponseEntity.ok(rssService.fetchRss(rssRequest));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
 
     @PostMapping("/read-source")

@@ -83,14 +83,13 @@ public class RssService {
         return lsCategories;
     }
 
-    public String fetchRss(RssRequest rssRequest) {
+    public String fetchRss(RssRequest rssRequest) throws Exception {
         Optional<Category> optional = categoryRepository.findById(rssRequest.getCategoryId());
         if (optional.isEmpty()) {
             return "không tìm thấy category";
         }
 
         URL feedUrl = null;
-        try {
             feedUrl = new URL(rssRequest.getUrl());
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed feed = input.build(new XmlReader(feedUrl));
@@ -108,9 +107,7 @@ public class RssService {
                     postService.add(post);
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         return "ok";
     }
 }
