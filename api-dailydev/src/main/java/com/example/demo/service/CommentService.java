@@ -24,6 +24,10 @@ public class CommentService {
         return repository.findAllByPostId(post.getId());
     }
 
+    public List<Comment> getAllByAccount(Account account) {
+        return repository.findAllByAccount_Id(account.getId());
+    }
+
     public Comment findById(Long id) {
         Optional<Comment> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);

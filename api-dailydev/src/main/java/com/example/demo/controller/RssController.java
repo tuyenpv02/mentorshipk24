@@ -23,7 +23,7 @@ public class RssController {
 //        return ResponseEntity.ok(service.fetchRss(rss));
 //    }
 
-    @PostMapping("/fetch-request")
+    @PostMapping("/url")
     public ResponseEntity<?> fetchRssUrl(@RequestBody RssRequest rssRequest) {
         try {
             return ResponseEntity.ok(rssService.fetchRss(rssRequest));
@@ -32,7 +32,7 @@ public class RssController {
         }
     }
 
-    @PostMapping("/read-source")
+    @PostMapping("/source")
     public ResponseEntity<?> fetchSource(@RequestParam String url) {
 
         return ResponseEntity.ok(rssService.readSource(url));

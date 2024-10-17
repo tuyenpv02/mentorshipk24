@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Account;
 import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
 import com.example.demo.service.CommentService;
@@ -25,6 +26,10 @@ public class CommentController {
         return ResponseEntity.ok(service.getAllByPost(post));
     }
 
+    @GetMapping("/post")
+    public ResponseEntity<?> getAllByAccount(@RequestBody Account account) {
+        return ResponseEntity.ok(service.getAllByAccount(account));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {

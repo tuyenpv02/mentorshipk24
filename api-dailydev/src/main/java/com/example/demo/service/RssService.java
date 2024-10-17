@@ -41,7 +41,11 @@ public class RssService {
         List<Category> categories = categoryRepository.findAll();
         categories.forEach(o -> {
             RssRequest rssRequest = new RssRequest(o.getLink(), o.getSource().getId());
-            fetchRss(rssRequest);
+            try {
+                fetchRss(rssRequest);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 //        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60 * 1000));
     }
@@ -90,23 +94,24 @@ public class RssService {
         }
 
         URL feedUrl = null;
-            feedUrl = new URL(rssRequest.getUrl());
-            SyndFeedInput input = new SyndFeedInput();
-            SyndFeed feed = input.build(new XmlReader(feedUrl));
-            for (SyndEntry entry : (List<SyndEntry>) feed.getEntries()) {
+        feedUrl = new URL(rssRequest.getUrl());
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = input.build(new XmlReader(feedUrl));
 
-                if (postService.findByGuId(entry.getUri()) == null) {
-                    Post post = new Post();
-                    post.setTitle(entry.getTitle());
-                    post.setLink(entry.getLink());
-                    post.setGuId(entry.getUri());
-                    post.setDescription(entry.getDescription().getValue());
-                    post.setPubDate(LocalDateTime.now());
-                    post.setCategory(Category.builder().id(optional.get().getId()).build());
+        for (SyndEntry entry : (List<SyndEntry>) feed.getEntries()) {
 
-                    postService.add(post);
-                }
+            if (postService.findByGuId(entry.getUri()) == null) {
+                Post post = new Post();
+                post.setTitle(entry.getTitle());
+                post.setLink(entry.getLink());
+                post.setGuId(entry.getUri());
+                post.setDescription(entry.getDescription().getValue());
+                post.setPubDate(LocalDateTime.now());
+                post.setCategory(Category.builder().id(optional.get().getId()).build());
+
+                postService.add(post);
             }
+        }
 
         return "ok";
     }
