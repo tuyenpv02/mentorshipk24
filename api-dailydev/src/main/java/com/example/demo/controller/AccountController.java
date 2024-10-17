@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.SignUpDTO;
+import com.example.demo.dto.UserLoginDTO;
 import com.example.demo.entity.Account;
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,20 @@ public class AccountController {
     @Autowired
     AccountService service;
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserLoginDTO userLoginDTO) {
+        return ResponseEntity.ok(service.login(userLoginDTO));
+    }
+
+    @PostMapping("/sign-up")
+    public ResponseEntity<?> signUp(@RequestBody SignUpDTO signUpDTO) {
+        if(service.checkEmail(signUpDTO.getEmail())){
+            return ResponseEntity.badRequest().body("Email đã được đăng ký");
+        }
+
+        return ResponseEntity.ok(service.signUp(signUpDTO));
+    }
+
     @GetMapping("")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(service.getAll());
@@ -27,16 +43,6 @@ public class AccountController {
             );
         }
         return ResponseEntity.ok(service.findById(id));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
-        if (!service.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    "Không tìm thấy"
-            );
-        }
-        return ResponseEntity.ok(service.deleteById(id));
     }
 
     @PostMapping("")
