@@ -72,6 +72,9 @@ public class RssService {
 
                 // Lấy liên kết RSS từ cột thứ hai (td thứ hai)
                 String link = rssItem.select("td a").attr("href");
+                if (link.startsWith("//")) {
+                    link = "https:" + link;
+                }
 
                 Optional<Category> newCategory = categoryRepository.findByNameAndSource(category, source);
                 if (newCategory.isEmpty()) {

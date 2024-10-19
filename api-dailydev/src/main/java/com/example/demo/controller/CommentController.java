@@ -26,7 +26,7 @@ public class CommentController {
         return ResponseEntity.ok(service.getAllByPost(post));
     }
 
-    @GetMapping("/post")
+    @GetMapping("/account")
     public ResponseEntity<?> getAllByAccount(@RequestBody Account account) {
         return ResponseEntity.ok(service.getAllByAccount(account));
     }
