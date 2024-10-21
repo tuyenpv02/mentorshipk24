@@ -36,7 +36,7 @@ public class RssService {
     @Autowired
     private SourceRepository sourceRepository;
 
-    @Scheduled(fixedDelay = 60 * 60 * 1000)
+//    @Scheduled(fixedDelay = 60 * 60 * 1000)
     public void scheduleFixedDelayTask() {
         List<Category> categories = categoryRepository.findAll();
         categories.forEach(o -> {
@@ -47,7 +47,6 @@ public class RssService {
                 e.printStackTrace();
             }
         });
-//        System.out.println("Fixed delay task - " + System.currentTimeMillis() / (60 * 1000));
     }
 
     public List<Category> readSource(String url) {
@@ -96,8 +95,7 @@ public class RssService {
             return "không tìm thấy category";
         }
 
-        URL feedUrl = null;
-        feedUrl = new URL(rssRequest.getUrl());
+        URL feedUrl = new URL(rssRequest.getUrl());
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = input.build(new XmlReader(feedUrl));
 

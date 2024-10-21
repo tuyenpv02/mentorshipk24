@@ -23,7 +23,7 @@ public class AccountController {
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody SignUpDTO signUpDTO) {
-        if(service.checkEmail(signUpDTO.getEmail())){
+        if (service.checkEmail(signUpDTO.getEmail())) {
             return ResponseEntity.badRequest().body("Email đã được đăng ký");
         }
 

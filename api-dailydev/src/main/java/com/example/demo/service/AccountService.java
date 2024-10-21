@@ -34,7 +34,10 @@ public class AccountService {
     }
 
     public String signUp(SignUpDTO signUpDTO) {
-        Account account = Account.builder().username(signUpDTO.getUsername()).email(signUpDTO.getEmail()).password(signUpDTO.getPassword()).build();
+        Account account = Account.builder()
+                .username(signUpDTO.getUsername())
+                .email(signUpDTO.getEmail())
+                .password(signUpDTO.getPassword()).build();
         repository.save(account);
         return "Đăng ký thành công";
     }
@@ -52,21 +55,13 @@ public class AccountService {
         return repository.save(user);
     }
 
-    public Account update(Long id, Account newUser) {
+    public Account update(Long id, Account user) {
         Optional<Account> optional = repository.findById(id);
         return optional.map(o -> {
-            o.setUsername(newUser.getUsername());
-            o.setEmail(newUser.getEmail());
-            o.setPassword(newUser.getPassword());
+            o.setUsername(user.getUsername());
+            o.setEmail(user.getEmail());
+            o.setPassword(user.getPassword());
             return repository.save(o);
-        }).orElse(null);
-    }
-
-    public Account deleteById(Long id) {
-        Optional<Account> optional = repository.findById(id);
-        return optional.map(o -> {
-            repository.delete(o);
-            return o;
         }).orElse(null);
     }
 

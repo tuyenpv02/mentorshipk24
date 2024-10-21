@@ -21,11 +21,11 @@ public class PostService {
     }
 
     public List<Post> getAllByUserId(Long userId) {
-        return repository.findAllByAccount_Id(userId);
+        return repository.findAllByAccountId(userId);
     }
 
     public List<Post> getAllByCategoryId(Long cateId) {
-        return repository.findAllByCategory_Id(cateId);
+        return repository.findAllByCategoryId(cateId);
     }
 
     public Post findByName(String name) {

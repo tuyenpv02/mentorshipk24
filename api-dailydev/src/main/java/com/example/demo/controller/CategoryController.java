@@ -26,7 +26,7 @@ public class CategoryController {
     }
 
     @GetMapping("/source")
-    public ResponseEntity<?> getAllSource(@RequestParam("sourceId")Long sourceId) {
+    public ResponseEntity<?> getAllSource(@RequestParam("sourceId") Long sourceId) {
         return ResponseEntity.ok(service.getAllBySource(sourceId));
     }
 
