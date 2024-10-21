@@ -1,60 +1,21 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Account;
+import com.example.demo.entity.Category;
 import com.example.demo.entity.Comment;
-import com.example.demo.entity.Post;
-import com.example.demo.repository.CommentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class CommentService {
+public interface CommentService {
 
-    @Autowired
-    private CommentRepository repository;
+    List<Comment> getAll();
 
-    public List<Comment> getAll() {
-        return repository.findAll();
-    }
+    Comment findById(Long id);
 
-    public List<Comment> getAllByPost(Post post) {
-        return repository.findAllByPostId(post.getId());
-    }
+    Comment add(Comment comment);
 
-    public List<Comment> getAllByAccount(Account account) {
-        return repository.findAllByAccount_Id(account.getId());
-    }
+    Comment update(Long id, Comment newComment);
 
-    public Comment findById(Long id) {
-        Optional<Comment> optional = repository.findById(id);
-        return optional.map(o -> o).orElse(null);
-    }
-    public Comment add(Comment Comment) {
-        return repository.save(Comment);
-    }
+    Comment deleteById(Long id);
 
-    public Comment update(Long id, Comment newComment) {
-        Optional<Comment> optional = repository.findById(id);
-        return optional.map(o -> {
-            o.setDescription(newComment.getDescription());
-            o.setPost(Post.builder().id(newComment.getPost().getId()).build());
-            o.setAccount(Account.builder().id(newComment.getAccount().getId()).build());
-            return repository.save(o);
-        }).orElse(null);
-    }
-
-    public Comment deleteById(Long id) {
-        Optional<Comment> optional = repository.findById(id);
-        return optional.map(o -> {
-            repository.delete(o);
-            return o;
-        }).orElse(null);
-    }
-
-    public Boolean existsById(Long id) {
-        return repository.existsById(id);
-    }
+    Boolean existsById(Long id);
 }

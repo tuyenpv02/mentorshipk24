@@ -2,10 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Post;
 import com.example.demo.entity.PostTag;
-import com.example.demo.entity.Source;
 import com.example.demo.entity.Tag;
-import com.example.demo.service.PostTagService;
-import com.example.demo.service.SourceService;
+import com.example.demo.service.impl.PostTagServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostTagController {
 
     @Autowired
-    PostTagService service;
+    PostTagServiceImpl service;
 
     @GetMapping("/post")
     public ResponseEntity<?> getAllPostTagByPost(@RequestBody Post post) {

@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.FollowTag;
-import com.example.demo.service.FollowTagService;
+import com.example.demo.service.impl.FollowTagServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class FollowTagController {
 
     @Autowired
-    FollowTagService service;
+    FollowTagServiceImpl service;
     
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getAllFollowTag(@PathVariable(name = "id") Long id) {

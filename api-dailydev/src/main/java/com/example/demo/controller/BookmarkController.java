@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Bookmark;
-import com.example.demo.service.BookmarkService;
+import com.example.demo.service.impl.BookmarkServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookmarkController {
 
     @Autowired
-    BookmarkService service;
+    BookmarkServiceImpl service;
 
     @GetMapping("/{userId}")
     public ResponseEntity<?> getAllByUserId(@PathVariable("userId")Long userId) {

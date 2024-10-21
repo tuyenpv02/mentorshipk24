@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.SignUpDTO;
 import com.example.demo.dto.UserLoginDTO;
 import com.example.demo.entity.Account;
-import com.example.demo.service.AccountService;
+import com.example.demo.service.impl.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     @Autowired
-    AccountService service;
+    AccountServiceImpl service;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserLoginDTO userLoginDTO) {

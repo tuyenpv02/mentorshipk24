@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Follow;
-import com.example.demo.service.FollowService;
+import com.example.demo.service.impl.FollowServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class FollowController {
 
     @Autowired
-    FollowService service;
+    FollowServiceImpl service;
 
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getAllUser(@PathVariable(name = "id") Long id) {

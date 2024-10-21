@@ -1,37 +1,18 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.FollowTag;
-import com.example.demo.repository.FollowTagRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class FollowTagService {
+public interface FollowTagService {
 
-    @Autowired
-    private FollowTagRepository repository;
+    List<FollowTag> getAllTagByUserId(Long userId);
 
-    //    Lấy danh sách follow tag được theo dõi của user
-    public List<FollowTag> getAllTagByUserId(Long userId) {
-        return repository.findAllByAccount_Id(userId);
-    }
+    List<FollowTag> getAll();
 
-    public FollowTag add(FollowTag FollowTag) {
-        return repository.save(FollowTag);
-    }
+    FollowTag add(FollowTag followTag);
 
-    public FollowTag deleteById(Long id) {
-        Optional<FollowTag> optional = repository.findById(id);
-        return optional.map(o -> {
-            repository.delete(o);
-            return o;
-        }).orElse(null);
-    }
+    FollowTag deleteById(Long id);
 
-    public Boolean existsById(Long id) {
-        return repository.existsById(id);
-    }
+    Boolean existsById(Long id);
 }

@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
-import com.example.demo.service.CommentService;
+import com.example.demo.service.impl.CommentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
 
     @Autowired
-    CommentService service;
+    CommentServiceImpl service;
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {

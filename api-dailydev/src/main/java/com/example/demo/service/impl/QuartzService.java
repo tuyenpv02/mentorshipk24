@@ -4,7 +4,6 @@ import com.example.demo.dto.RssRequest;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.CategoryRepository;
-import com.example.demo.service.PostService;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
@@ -25,7 +24,7 @@ public class QuartzService implements Job {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    private PostService postService;
+    private PostServiceImpl postService;
 
 
     @Override

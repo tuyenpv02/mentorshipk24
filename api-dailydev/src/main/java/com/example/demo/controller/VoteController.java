@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Post;
 import com.example.demo.entity.Vote;
-import com.example.demo.service.VoteService;
+import com.example.demo.service.impl.VoteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class VoteController {
 
     @Autowired
-    VoteService service;
+    VoteServiceImpl service;
 
     @GetMapping("/type")
     public ResponseEntity<?> getAllByType(@RequestParam("type") Integer type) {

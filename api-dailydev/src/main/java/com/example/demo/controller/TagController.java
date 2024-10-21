@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.Tag;
-import com.example.demo.service.TagService;
+import com.example.demo.service.impl.TagServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class TagController {
 
     @Autowired
-    TagService service;
+    TagServiceImpl service;
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {

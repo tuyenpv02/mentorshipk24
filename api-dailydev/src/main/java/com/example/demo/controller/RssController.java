@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.RssRequest;
-import com.example.demo.entity.Category;
-import com.example.demo.service.CategoryService;
-import com.example.demo.service.RssService;
+import com.example.demo.service.impl.CategoryServiceImpl;
+import com.example.demo.service.impl.RssServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 public class RssController {
 
     @Autowired
-    private RssService rssService;
+    private RssServiceImpl rssService;
 
     @Autowired
-    CategoryService service;
+    CategoryServiceImpl service;
 
 //    @PostMapping("/fetch-category")
 //    public ResponseEntity<?> fetchRssCategory(@RequestBody Category rss) {

@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Post;
-import com.example.demo.service.PostService;
+import com.example.demo.service.impl.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     @Autowired
-    PostService service;
+    PostServiceImpl service;
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {

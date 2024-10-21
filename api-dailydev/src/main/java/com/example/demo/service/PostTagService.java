@@ -1,45 +1,21 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.FollowTag;
 import com.example.demo.entity.Post;
 import com.example.demo.entity.PostTag;
 import com.example.demo.entity.Tag;
-import com.example.demo.repository.FollowTagRepository;
-import com.example.demo.repository.PostTagRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class PostTagService {
+public interface PostTagService {
 
-    @Autowired
-    private PostTagRepository repository;
+    List<PostTag> getAllPostTagByByTag(Tag tag);
+
+    List<PostTag> getAllPostTagByByPost(Post post);
 
 
-    public List<PostTag> getAllPostTagByByPost(Post post) {
-        return repository.findAllByPostId(post.getId());
-    }
+    PostTag add(PostTag postTag);
 
-    public List<PostTag> getAllPostTagByByTag(Tag tag) {
-        return repository.findAllByTagId(tag.getId());
-    }
+    PostTag deleteById(Long id);
 
-    public PostTag add(PostTag postTag) {
-        return repository.save(postTag);
-    }
-
-    public PostTag deleteById(Long id) {
-        Optional<PostTag> optional = repository.findById(id);
-        return optional.map(o -> {
-            repository.delete(o);
-            return o;
-        }).orElse(null);
-    }
-
-    public Boolean existsById(Long id) {
-        return repository.existsById(id);
-    }
+    Boolean existsById(Long id);
 }
