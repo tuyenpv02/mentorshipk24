@@ -17,6 +17,7 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository repository;
 
+
     public List<Post> getAll() {
         return repository.findAll();
     }
@@ -43,7 +44,6 @@ public class PostServiceImpl implements PostService {
         List<Post> optional = repository.findByLink(link);
         if (optional.size() > 0) {
             return optional.get(0);
-
         }
         return null;
     }

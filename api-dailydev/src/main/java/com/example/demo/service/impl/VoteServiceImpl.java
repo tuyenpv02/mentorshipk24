@@ -38,10 +38,10 @@ public class VoteServiceImpl implements VoteService {
         return repository.findAllByPostId(commentId);
     }
 
-//    public Vote findById(Long id) {
-//        Optional<Vote> optional = repository.findById(id);
-//        return optional.map(o -> o).orElse(null);
-//    }
+    public Vote findById(Long id) {
+        Optional<Vote> optional = repository.findById(id);
+        return optional.map(o -> o).orElse(null);
+    }
 
     public Vote add(Vote Vote) {
         return repository.save(Vote);

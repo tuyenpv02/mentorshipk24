@@ -19,9 +19,12 @@ public class QuartzConfig {
     @Bean
     public Trigger rssJobTrigger() {
         // Lên lịch chạy job mỗi 24 giờ (tức là hàng ngày)
-        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInMinutes(5)  // Mỗi 24 giờ chạy 1 lần
-                .repeatForever();  // Lặp vô hạn
+//        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
+//                .withIntervalInHours(24)  // Mỗi 24 giờ chạy 1 lần
+//                .repeatForever();  // Lặp vô hạn
+
+        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.dailyAtHourAndMinute(6, 0);  // 9:00 AM mỗi ngày
+
 
         return TriggerBuilder.newTrigger()
                 .forJob(rssJobDetail())  // Gắn với JobDetail đã tạo

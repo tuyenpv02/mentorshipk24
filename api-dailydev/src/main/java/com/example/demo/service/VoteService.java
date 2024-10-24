@@ -16,6 +16,8 @@ public interface VoteService {
 
     List<Vote> getAllByCommentId(Long commentId);
 
+    Vote findById(Long id);
+
     Vote add(Vote Vote);
 
     Vote deleteById(Long id);
