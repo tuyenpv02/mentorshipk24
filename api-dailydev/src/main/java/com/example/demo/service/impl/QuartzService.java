@@ -65,7 +65,7 @@ public class QuartzService implements Job {
                 post.setPubDate(LocalDateTime.now());
                 post.setCategory(Category.builder().id(optional.get().getId()).build());
 
-                postService.add(post);
+                postService.save(post);
             }
         }
         return "ok";

@@ -3,9 +3,14 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
+import com.example.demo.entity.Source;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,12 +26,19 @@ public class CommentServiceImpl implements CommentService {
         return repository.findAll();
     }
 
+    public Page<Comment> getAll(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id");
+
+        return repository.findAll(pageable);
+    }
+
     public List<Comment> getAllByPost(Post post) {
         return repository.findAllByPostId(post.getId());
     }
 
     public List<Comment> getAllByAccount(Account account) {
-        return repository.findAllByAccount_Id(account.getId());
+        return repository.findAllByAccountId(account.getId());
     }
 
     public Comment findById(Long id) {

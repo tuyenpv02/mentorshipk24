@@ -30,13 +30,17 @@ public class AccountController {
         return ResponseEntity.ok(service.signUp(signUpDTO));
     }
 
-
-
     // lấy danh sách account theo page và size
     @GetMapping("")
-    public ResponseEntity<?> getAll(@RequestParam("page") int page
+    public ResponseEntity<?> getAll(
+            @RequestParam("page") int page
             , @RequestParam("size") int size) {
-        return ResponseEntity.ok(service.getAll(page, size));
+        if (page < 1 || size < 1) {
+            return ResponseEntity.badRequest().body("Page or size is not integer");
+        }
+
+
+        return ResponseEntity.ok(service.getAll(page -1 , size));
     }
 
     @GetMapping("/{id}")

@@ -17,9 +17,14 @@ public class PostController {
 
     @GetMapping("")
     public ResponseEntity<?> getAll(
-            @RequestParam("page") int page
-            , @RequestParam("size") int size) {
-        return ResponseEntity.ok(service.getAll(page, size));
+            @RequestParam(value = "page", defaultValue = "1") int page
+            , @RequestParam(value = "size", defaultValue = "5") int size
+            , @RequestParam(value = "keyword", defaultValue = "", required = false) String keyword
+    ) {
+        if (page < 1 || size < 1) {
+            return ResponseEntity.badRequest().body("Page or size is not integer");
+        }
+        return ResponseEntity.ok(service.getAll(page -1 , size, keyword.trim()));
     }
 
     @GetMapping("/user/{userId}")
@@ -54,7 +59,7 @@ public class PostController {
 
     @PostMapping("")
     public ResponseEntity<?> add(@RequestBody Post Post) {
-        return ResponseEntity.ok(service.add(Post));
+        return ResponseEntity.ok(service.save(Post));
     }
 
     @PutMapping("/{id}")

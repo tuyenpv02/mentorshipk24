@@ -15,8 +15,14 @@ public class BookmarkController {
     BookmarkServiceImpl service;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getAllByUserId(@PathVariable("userId")Long userId) {
-        return ResponseEntity.ok(service.getAllByUserId(userId));
+    public ResponseEntity<?> getAllByUserId(
+            @PathVariable("userId") Long userId
+            , @RequestParam("page") int page
+            , @RequestParam("size") int size) {
+        if (page < 1 || size < 1) {
+            return ResponseEntity.badRequest().body("Page or size is not integer");
+        }
+        return ResponseEntity.ok(service.getAllByUserId(userId, page -1 , size));
     }
 
     @DeleteMapping("/{id}")

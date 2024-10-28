@@ -4,6 +4,7 @@ import com.example.demo.entity.Post;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostService {
 
@@ -19,12 +20,12 @@ public interface PostService {
 
     Post findByLink(String link);
 
-    Post findByGuId(String guId);
+    Optional<Post> findByGuId(String guId);
 
     Post findByName(String name);
 
 
-    Post add(Post post);
+    Post save(Post post);
 
     Post update(Long id, Post newPost);
 

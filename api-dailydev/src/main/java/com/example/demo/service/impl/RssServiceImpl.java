@@ -13,11 +13,13 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -37,6 +39,7 @@ public class RssServiceImpl implements RssService {
     @Autowired
     private SourceRepository sourceRepository;
 
+
 //    @Scheduled(fixedDelay = 60 * 60 * 1000)
     public void scheduleFixedDelayTask() {
         List<Category> categories = categoryRepository.findAll();
@@ -50,6 +53,7 @@ public class RssServiceImpl implements RssService {
         });
     }
 
+    // đọc source ( https://www.24h.com.vn/guest/RSS/ )
     public List<Category> readSource(String url) {
         Source source = sourceRepository.findByUrl(url);
         if (source == null) {
@@ -57,7 +61,6 @@ public class RssServiceImpl implements RssService {
         }
         List<Category> lsCategories = new ArrayList<>();
         try {
-            // https://www.24h.com.vn/guest/RSS/
 
             // Lấy và phân ích cú pháp HTML từ trtang
             Document doc = Jsoup.connect(url).get();
@@ -90,9 +93,10 @@ public class RssServiceImpl implements RssService {
         return lsCategories;
     }
 
+    // đọc posts từ url
     public String fetchRss(RssRequest rssRequest) throws Exception {
-        Optional<Category> optional = categoryRepository.findById(rssRequest.getCategoryId());
-        if (optional.isEmpty()) {
+        Optional<Category> optionalCategory = categoryRepository.findById(rssRequest.getCategoryId());
+        if (optionalCategory.isEmpty()) {
             return "không tìm thấy category";
         }
 
@@ -101,20 +105,28 @@ public class RssServiceImpl implements RssService {
         SyndFeed feed = input.build(new XmlReader(feedUrl));
 
         for (SyndEntry entry : (List<SyndEntry>) feed.getEntries()) {
-
-            if (postService.findByGuId(entry.getUri()) == null) {
+            Optional<Post> optionalPost = postService.findByGuId(entry.getUri());
+            if (optionalPost.isEmpty()) {
                 Post post = new Post();
                 post.setTitle(entry.getTitle());
                 post.setLink(entry.getLink());
                 post.setGuId(entry.getUri());
                 post.setDescription(entry.getDescription().getValue());
                 post.setPubDate(LocalDateTime.now());
-                post.setCategory(Category.builder().id(optional.get().getId()).build());
-
-                postService.add(post);
+                post.setCreateAt(LocalDateTime.now());
+                post.setCategory(Category.builder().id(optionalCategory.get().getId()).build());
+                postService.save(post);
+                continue;
+            } else {
+                Post post = optionalPost.get();
+                post.setTitle(entry.getTitle());
+                post.setLink(entry.getLink());
+                post.setDescription(entry.getDescription().getValue());
+                post.setPubDate(LocalDateTime.now());
+                postService.save(post);
             }
         }
-
         return "ok";
     }
+
 }

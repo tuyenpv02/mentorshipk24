@@ -1,13 +1,22 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Account;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Comment;
+import com.example.demo.entity.Post;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface CommentService {
 
     List<Comment> getAll();
+
+    Page<Comment> getAll(int page, int size);
+
+    List<Comment> getAllByPost(Post post);
+
+    List<Comment> getAllByAccount(Account account);
 
     Comment findById(Long id);
 

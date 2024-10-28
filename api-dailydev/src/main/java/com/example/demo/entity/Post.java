@@ -32,6 +32,8 @@ public class Post {
 
     private LocalDateTime pubDate;
 
+    private LocalDateTime createAt;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonIgnore  // Bỏ qua khi serialize

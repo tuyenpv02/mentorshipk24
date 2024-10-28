@@ -18,7 +18,7 @@ public class FollowTagServiceImpl implements FollowTagService {
 
     //    Lấy danh sách follow tag được theo dõi của user
     public List<FollowTag> getAllTagByUserId(Long userId) {
-        return repository.findAllByAccount_Id(userId);
+        return repository.findAllByAccountId(userId);
     }
 
     public List<FollowTag> getAll() {

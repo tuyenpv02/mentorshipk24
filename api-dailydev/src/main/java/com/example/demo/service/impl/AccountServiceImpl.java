@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
-    public Page<Account> getAll(int page, int size) {
+    public Page<Account> getAll(int page , int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id");
 
