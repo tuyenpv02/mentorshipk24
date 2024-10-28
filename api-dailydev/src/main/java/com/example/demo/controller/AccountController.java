@@ -30,9 +30,13 @@ public class AccountController {
         return ResponseEntity.ok(service.signUp(signUpDTO));
     }
 
+
+
+    // lấy danh sách account theo page và size
     @GetMapping("")
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(service.getAll());
+    public ResponseEntity<?> getAll(@RequestParam("page") int page
+            , @RequestParam("size") int size) {
+        return ResponseEntity.ok(service.getAll(page, size));
     }
 
     @GetMapping("/{id}")

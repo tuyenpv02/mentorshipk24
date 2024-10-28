@@ -15,10 +15,11 @@ public class PostController {
     PostServiceImpl service;
 
 
-
     @GetMapping("")
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(service.getAll());
+    public ResponseEntity<?> getAll(
+            @RequestParam("page") int page
+            , @RequestParam("size") int size) {
+        return ResponseEntity.ok(service.getAll(page, size));
     }
 
     @GetMapping("/user/{userId}")

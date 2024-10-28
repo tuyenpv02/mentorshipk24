@@ -6,6 +6,10 @@ import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
 import com.example.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +21,13 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository repository;
 
-
     public List<Post> getAll() {
         return repository.findAll();
+    }
+
+    public Page<Post> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id");
+        return repository.findAll(pageable);
     }
 
     public List<Post> getAllByUserId(Long userId) {

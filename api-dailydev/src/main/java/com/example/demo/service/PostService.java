@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Post;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface PostService {
 
+    Page<Post> getAll(int page, int size);
     List<Post> getAll();
 
     List<Post> getAllByCategoryId(Long cateId);

@@ -2,11 +2,16 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.SignUpDTO;
 import com.example.demo.dto.UserLoginDTO;
+import com.example.demo.dto.response.PageResponse;
 import com.example.demo.entity.Account;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.service.AccountService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,8 +48,12 @@ public class AccountServiceImpl implements AccountService {
         return "Đăng ký thành công";
     }
 
-    public List<Account> getAll() {
-        return repository.findAll();
+
+    public Page<Account> getAll(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id");
+
+        return repository.findAll(pageable);
     }
 
     public Account findById(Long id) {
