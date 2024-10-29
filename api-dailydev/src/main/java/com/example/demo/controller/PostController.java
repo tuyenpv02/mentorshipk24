@@ -14,7 +14,6 @@ public class PostController {
     @Autowired
     PostServiceImpl service;
 
-
     @GetMapping("")
     public ResponseEntity<?> getAll(
             @RequestParam(value = "page", defaultValue = "1") int page
@@ -22,7 +21,7 @@ public class PostController {
             , @RequestParam(value = "keyword", defaultValue = "", required = false) String keyword
     ) {
         if (page < 1 || size < 1) {
-            return ResponseEntity.badRequest().body("Page or size is not integer");
+            return ResponseEntity.badRequest().body("Vui lòng nhập số lớn hơn 0");
         }
         return ResponseEntity.ok(service.getAll(page -1 , size, keyword.trim()));
     }

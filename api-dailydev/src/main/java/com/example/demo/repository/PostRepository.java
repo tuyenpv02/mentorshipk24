@@ -25,17 +25,15 @@ public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificat
             "        p1_0.link,\n" +
             "        p1_0.pub_date,\n" +
             "        p1_0.title \n" +
-            "    from\n" +
-            "        post p1_0 \n" +
-            "    join\n" +
-            "        category c1_0 \n" +
+            "    from post p1_0 \n" +
+            "    join category c1_0 \n" +
             "            on c1_0.id=p1_0.category_id \n" +
             "    where\n" +
             "        (\n" +
             "            p1_0.link like :keyword \n" +
             "            or p1_0.title like :keyword \n" +
             "        ) \n" ,
-            countQuery = "select count(*) \n" +
+            countQuery = "select count(p1_0.id) \n" +
                     "    from\n" +
                     "        post p1_0 \n" +
                     "    join\n" +

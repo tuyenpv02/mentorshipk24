@@ -36,23 +36,6 @@ public class PostServiceImpl implements PostService {
 
     public Page<Post> getAll(int page, int size, String keyword) {
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id");
-
-//        Specification<Post> specification = (root, query, criteriaBuilder) -> {
-//            List<Predicate> predicates = new ArrayList<>();
-//
-//            if(!keyword.isEmpty()){
-//                Predicate likeTitle = criteriaBuilder.like(root.get("title"), "%" + keyword + "%");
-//                Predicate likeLink = criteriaBuilder.like(root.get("link"), "%" + keyword + "%");
-//                predicates.add(criteriaBuilder.or(likeLink, likeTitle));
-//
-//                Join<Post, Category> categoryJoin = root.join("category", JoinType.INNER);
-//                Predicate categoryPredicate = criteriaBuilder.like(categoryJoin.get("name"), keyword);
-//                predicates.add( categoryPredicate) ;
-//            }
-//
-//            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-//        };
-
         return repository.findByKeyword("%" + keyword + "%", pageable);
     }
 

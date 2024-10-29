@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,15 +25,23 @@ public class Vote {
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
+//    @JsonIgnore
     private Account account;
 
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
+//    @JsonIgnore
     private Post post;
 
     @ManyToOne
     @JoinColumn(name = "comment_id", referencedColumnName = "id")
+//    @JsonIgnore
     private Comment comment;
 
-    private Timestamp createAt;
+    private LocalDateTime createAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createAt = LocalDateTime.now();
+    }
 }

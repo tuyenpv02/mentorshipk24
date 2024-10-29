@@ -8,7 +8,7 @@ public interface VoteService {
 
     List<Vote> getAll();
 
-    List<Vote> getAllVoteByTyoe(Integer type);
+    List<Vote> getAllVotesByType(Long postId, Integer type);
 
     List<Vote> getAllByAccountId(Long userId);
 

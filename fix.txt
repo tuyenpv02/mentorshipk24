@@ -1,0 +1,38 @@
+
+-sửa lại url các api
+/posts/{postId}/comments/{commentId}/votes/{voteId}
+HTTP POST /tags
+HTTP POST /posts/{postId}/tags
+-search post theo keyword thì thêm desc trong swagger
+
+- implement odata
+
+ -SQL Injection
+
+
+- sửa lại time, iso8601
+
+
+- retry khi đọc rss
+
+batching, trunk ( xử lý dữ liệu quá lớn, xử lý từng đoạn)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

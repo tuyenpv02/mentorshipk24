@@ -13,7 +13,7 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
     List<Vote> findAllByPostId(Long postId);
 
-    List<Vote> findAllByType(Integer type);
+    List<Vote> findAllByPostIdAndType(Long postId, Integer type);
 
     List<Vote> findAllByCommentId(Long commentId);
 

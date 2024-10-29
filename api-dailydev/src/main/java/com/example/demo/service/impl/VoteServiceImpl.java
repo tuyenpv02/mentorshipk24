@@ -22,8 +22,8 @@ public class VoteServiceImpl implements VoteService {
         return repository.findAll();
     }
 
-    public List<Vote> getAllVoteByTyoe(Integer type) {
-        return repository.findAllByType(type);
+    public List<Vote> getAllVotesByType(Long postId, Integer type) {
+        return repository.findAllByPostIdAndType(postId, type);
     }
 
     public List<Vote> getAllByAccountId(Long userId) {

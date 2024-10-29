@@ -25,7 +25,6 @@ public class QuartzConfig {
 
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.dailyAtHourAndMinute(6, 0);  // 9:00 AM mỗi ngày
 
-
         return TriggerBuilder.newTrigger()
                 .forJob(rssJobDetail())  // Gắn với JobDetail đã tạo
                 .withIdentity("rssTrigger")
