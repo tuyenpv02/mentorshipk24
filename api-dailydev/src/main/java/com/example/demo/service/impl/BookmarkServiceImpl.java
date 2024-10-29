@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dto.response.PageResponse;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Bookmark;
+import com.example.demo.entity.Category;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.BookmarkRepository;
 import com.example.demo.service.BookmarkService;
@@ -21,6 +22,10 @@ public class BookmarkServiceImpl implements BookmarkService {
 
     @Autowired
     private BookmarkRepository repository;
+
+    public List<Bookmark> getAll() {
+        return repository.findAll();
+    }
 
     public PageResponse<Bookmark> getAllByUserId(Long userId, int pageNumber, int size) {
 
