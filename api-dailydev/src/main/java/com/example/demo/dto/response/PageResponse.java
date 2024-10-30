@@ -1,5 +1,6 @@
 package com.example.demo.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.util.List;
@@ -16,5 +17,4 @@ public class PageResponse<T> {
     private int totalPages;
     private long totalElements;
     private List<T> data;
-
 }
