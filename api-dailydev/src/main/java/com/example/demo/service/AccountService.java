@@ -10,7 +10,7 @@ import java.util.List;
 public interface AccountService {
 
     //
-    String login(UserLoginDTO userLoginDTO);
+    Boolean login(UserLoginDTO userLoginDTO);
 
     String signUp(SignUpDTO signUpDTO);
 

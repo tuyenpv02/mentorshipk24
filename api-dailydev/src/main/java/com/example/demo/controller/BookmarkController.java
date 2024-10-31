@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/daily/v1")
+@RequestMapping("/daily")
 public class BookmarkController {
 
     @Autowired
@@ -59,11 +59,8 @@ public class BookmarkController {
         if (page < 1) {
             return ResponseEntity.badRequest().body("nhập page lớn hơn 1");
         }
-        if (size < 5) {
-            size = 5;
-        } else if (size > 100) {
-            size = 100;
-        }
+        // Thiết lập giá trị cho size
+        size = Math.max(5, Math.min(size, 100));
         return ResponseEntity.ok(service.getAllByUserId(accoountId, page - 1, size));
     }
 

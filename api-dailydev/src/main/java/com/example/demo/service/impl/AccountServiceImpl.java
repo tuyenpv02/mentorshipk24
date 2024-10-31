@@ -23,12 +23,12 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository repository;
 
-    public String login(UserLoginDTO userLoginDTO) {
+    public Boolean login(UserLoginDTO userLoginDTO) {
         Optional<Account> account = repository.findByEmail(userLoginDTO.getEmail());
         if (userLoginDTO.getPassword().equals(account.get().getPassword())) {
-            return "Đăng nhập thành công";
+            return true;
         }
-        return "Email hoặc password không hợp lệ";
+        return false;
     }
 
     public boolean checkEmail(String email) {
