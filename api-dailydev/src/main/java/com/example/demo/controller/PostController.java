@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/posts")
+//@RequestMapping("/posts")
 public class PostController {
 
     @Autowired
@@ -62,7 +62,7 @@ public class PostController {
                     )
             )
     })
-    @GetMapping("")
+    @GetMapping("/posts")
     public ResponseEntity<?> getAll(
             @RequestParam(value = "page", defaultValue = "1")
                     int page,
@@ -125,7 +125,7 @@ public class PostController {
                     )
             )
     })
-    @GetMapping("/user/{userId}")
+    @GetMapping("/users/{userId}/posts")
     public ResponseEntity<?> getAllByAccountId(
             @PathVariable(name = "userId") Long userId,
             @RequestParam(value = "page", defaultValue = "1")
@@ -186,7 +186,7 @@ public class PostController {
                     )
             )
     })
-    @GetMapping("/category/{categoryId}")
+    @GetMapping("/categories/{categoryId}/posts")
     public ResponseEntity<?> getAllByCategoryId(
             @PathVariable("categoryId") Long categoryId,
             @RequestParam(value = "page", defaultValue = "1")
@@ -234,7 +234,7 @@ public class PostController {
                     content = @Content(mediaType = "text/plain", examples = @ExampleObject(value = "Không tìm thấy"))
             )
     })
-    @GetMapping("/{id}")
+    @GetMapping("/posts/{id}")
     public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {
         if (!service.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
@@ -257,7 +257,7 @@ public class PostController {
             @ApiResponse(responseCode = "404", description = "Không tìm thấy", content = @Content),
             @ApiResponse(responseCode = "500", description = "Xóa thất bại", content = @Content)
     })
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/posts/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
         if (!service.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
@@ -293,7 +293,7 @@ public class PostController {
     @ApiResponse(responseCode = "200", description = "Post được tạo thành công",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Post.class)))
-    @PostMapping("")
+    @PostMapping("/posts")
     public ResponseEntity<?> save(@RequestBody Post Post) {
         return ResponseEntity.ok(service.save(Post));
     }
@@ -328,7 +328,7 @@ public class PostController {
             @ApiResponse(responseCode = "200", description = "Cập nhật thành công"),
             @ApiResponse(responseCode = "404", description = "Không tìm thấy")
     })
-    @PutMapping("/{id}")
+    @PutMapping("/posts/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id
             , @RequestBody Post Post) {
         if (!service.existsById(id)) {

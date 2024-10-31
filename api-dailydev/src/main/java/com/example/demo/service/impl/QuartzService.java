@@ -20,6 +20,9 @@ import java.util.Optional;
 
 public class QuartzService implements Job {
 
+    private static final int MAX_RETRY_ATTEMPTS = 3;
+    private static final long RETRY_DELAY_MILLIS = 2000; // 2 giây
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -62,7 +65,6 @@ public class QuartzService implements Job {
                 post.setLink(entry.getLink());
                 post.setGuId(entry.getUri());
                 post.setDescription(entry.getDescription().getValue());
-//                post.setPubDate(LocalDateTime.now());
                 post.setCategory(Category.builder().id(optional.get().getId()).build());
 
                 postService.save(post);

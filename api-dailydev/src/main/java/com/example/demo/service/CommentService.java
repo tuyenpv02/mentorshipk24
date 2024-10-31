@@ -14,9 +14,9 @@ public interface CommentService {
 
     Page<Comment> getAll(int page, int size);
 
-    List<Comment> getAllByPost(Post post);
+    List<Comment> getAllByPostID(Long postId);
 
-    List<Comment> getAllByAccount(Account account);
+    List<Comment> getAllByAccount(Long accountId);
 
     Comment findById(Long id);
 

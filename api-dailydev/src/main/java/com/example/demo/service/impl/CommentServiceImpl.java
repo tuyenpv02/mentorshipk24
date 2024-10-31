@@ -33,18 +33,19 @@ public class CommentServiceImpl implements CommentService {
         return repository.findAll(pageable);
     }
 
-    public List<Comment> getAllByPost(Post post) {
-        return repository.findAllByPostId(post.getId());
+    public List<Comment> getAllByPostID(Long postId) {
+        return repository.findAllByPostId(postId);
     }
 
-    public List<Comment> getAllByAccount(Account account) {
-        return repository.findAllByAccountId(account.getId());
+    public List<Comment> getAllByAccount(Long accountId) {
+        return repository.findAllByAccountId(accountId);
     }
 
     public Comment findById(Long id) {
         Optional<Comment> optional = repository.findById(id);
         return optional.map(o -> o).orElse(null);
     }
+
     public Comment add(Comment Comment) {
         return repository.save(Comment);
     }

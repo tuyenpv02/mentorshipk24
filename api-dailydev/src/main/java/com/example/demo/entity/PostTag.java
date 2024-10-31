@@ -26,5 +26,5 @@ public class PostTag {
     @JoinColumn(name = "tag_id", referencedColumnName = "id")
     private Tag tag;
 
-    private Timestamp createAt;
+//    private Timestamp createAt;
 }

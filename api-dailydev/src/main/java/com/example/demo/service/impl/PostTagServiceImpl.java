@@ -19,12 +19,12 @@ public class PostTagServiceImpl implements PostTagService {
     @Autowired
     private PostTagRepository repository;
 
-    public List<PostTag> getAllPostTagByByPost(Post post) {
-        return repository.findAllByPostId(post.getId());
+    public List<PostTag> getAllPostTagByByPost(Long post) {
+        return repository.findAllByPostId(post);
     }
 
-    public List<PostTag> getAllPostTagByByTag(Tag tag) {
-        return repository.findAllByTagId(tag.getId());
+    public List<PostTag> getAllPostTagByByTag(Long tag) {
+        return repository.findAllByTagId(tag);
     }
 
     public PostTag add(PostTag postTag) {

@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface PostTagService {
 
-    List<PostTag> getAllPostTagByByTag(Tag tag);
+    List<PostTag> getAllPostTagByByTag(Long tag);
 
-    List<PostTag> getAllPostTagByByPost(Post post);
+    List<PostTag> getAllPostTagByByPost(Long post);
 
 
     PostTag add(PostTag postTag);
