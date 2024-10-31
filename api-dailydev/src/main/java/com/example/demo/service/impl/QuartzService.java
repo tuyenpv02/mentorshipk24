@@ -62,7 +62,7 @@ public class QuartzService implements Job {
                 post.setLink(entry.getLink());
                 post.setGuId(entry.getUri());
                 post.setDescription(entry.getDescription().getValue());
-                post.setPubDate(LocalDateTime.now());
+//                post.setPubDate(LocalDateTime.now());
                 post.setCategory(Category.builder().id(optional.get().getId()).build());
 
                 postService.save(post);

@@ -24,6 +24,6 @@ public class Source {
 
     private String url;
 
-    private Timestamp createAt;
+//    private Timestamp createAt;
 
 }

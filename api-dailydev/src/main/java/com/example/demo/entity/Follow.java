@@ -23,5 +23,5 @@ public class Follow {
 
     private Long followId;
 
-    private Timestamp createAt;
+//    private Timestamp createAt;
 }

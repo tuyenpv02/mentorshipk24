@@ -112,8 +112,8 @@ public class RssServiceImpl implements RssService {
                 post.setLink(entry.getLink());
                 post.setGuId(entry.getUri());
                 post.setDescription(entry.getDescription().getValue());
-                post.setPubDate(LocalDateTime.now());
-                post.setCreateAt(LocalDateTime.now());
+//                post.setPubDate(LocalDateTime.now());
+//                post.setCreateAt(LocalDateTime.now());
                 post.setCategory(Category.builder().id(optionalCategory.get().getId()).build());
                 postService.save(post);
                 continue;
@@ -122,7 +122,7 @@ public class RssServiceImpl implements RssService {
                 post.setTitle(entry.getTitle());
                 post.setLink(entry.getLink());
                 post.setDescription(entry.getDescription().getValue());
-                post.setPubDate(LocalDateTime.now());
+//                post.setPubDate(LocalDateTime.now());
                 postService.save(post);
             }
         }

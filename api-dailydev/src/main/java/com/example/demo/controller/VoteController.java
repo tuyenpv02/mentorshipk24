@@ -27,7 +27,7 @@ public class VoteController {
     //Lấy danh sách votes
     @Operation(summary = "Lấy danh sách votes",
             description = "Trả về danh sách votes, hỗ trợ phân trang",
-            tags = {"Vote Mamagement"}
+            tags = {"Vote Management"}
     )
     @ApiResponse(
             responseCode = "200",

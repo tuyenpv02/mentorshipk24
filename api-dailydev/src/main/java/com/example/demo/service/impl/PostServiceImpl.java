@@ -1,6 +1,8 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.response.PageResponse;
 import com.example.demo.entity.Account;
+import com.example.demo.entity.Bookmark;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
@@ -17,7 +19,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -34,23 +36,51 @@ public class PostServiceImpl implements PostService {
         return repository.findAll();
     }
 
-    public Page<Post> getAll(int page, int size, String keyword) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id");
-        return repository.findByKeyword("%" + keyword + "%", pageable);
-    }
-
     public Page<Post> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id");
-
         return repository.findAll(pageable);
     }
 
-    public List<Post> getAllByUserId(Long userId) {
-        return repository.findAllByAccountId(userId);
+    public PageResponse<Post> getAll(int page, int size, String keyword) {
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id");
+        Page<Post> postPage = repository.findByKeyword("%" + keyword + "%", pageable);
+
+        PageResponse<Post> response = PageResponse.<Post>builder()
+                .pageNumber(postPage.getNumber())
+                .size(postPage.getSize())
+                .totalPages(postPage.getTotalPages())
+                .totalElements(postPage.getTotalElements())
+                .data(postPage.getContent())
+                .build();
+        return response;
     }
 
-    public List<Post> getAllByCategoryId(Long cateId) {
-        return repository.findAllByCategoryId(cateId);
+    public PageResponse<Post> getAllByUserId(Long userId, int pageNumber, int size) {
+        Pageable pageable = PageRequest.of(pageNumber, size, Sort.Direction.DESC, "id");
+        Page<Post> postPage = repository.findAllByAccountId(userId, pageable);
+
+        PageResponse<Post> response = PageResponse.<Post>builder()
+                .pageNumber(postPage.getNumber())
+                .size(postPage.getSize())
+                .totalPages(postPage.getTotalPages())
+                .totalElements(postPage.getTotalElements())
+                .data(postPage.getContent())
+                .build();
+        return response;
+    }
+
+    public PageResponse<Post> getAllByCategoryId(Long cateId, int pageNumber, int size) {
+        Pageable pageable = PageRequest.of(pageNumber, size, Sort.Direction.DESC, "id");
+        Page<Post> postPage = repository.findAllByCategoryId(cateId, pageable);
+
+        PageResponse<Post> pageResponse = PageResponse.<Post>builder()
+                .pageNumber(postPage.getNumber())
+                .size(postPage.getSize())
+                .totalPages(postPage.getTotalPages())
+                .totalElements(postPage.getTotalElements())
+                .data(postPage.getContent())
+                .build();
+        return pageResponse;
     }
 
     public Post findByName(String name) {
@@ -91,12 +121,12 @@ public class PostServiceImpl implements PostService {
         }).orElse(null);
     }
 
-    public Post deleteById(Long id) {
+    public Boolean deleteById(Long id) {
         Optional<Post> optional = repository.findById(id);
         return optional.map(o -> {
             repository.delete(o);
-            return o;
-        }).orElse(null);
+            return true;
+        }).orElse(false);
     }
 
     public Boolean existsById(Long id) {

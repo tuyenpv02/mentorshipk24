@@ -19,11 +19,11 @@ public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificat
             "        p1_0.id,\n" +
             "        p1_0.account_id,\n" +
             "        p1_0.category_id,\n" +
-            "        p1_0.create_at,\n" +
+            "        p1_0.update_at,\n" +
             "        p1_0.description,\n" +
             "        p1_0.gu_id,\n" +
             "        p1_0.link,\n" +
-            "        p1_0.pub_date,\n" +
+            "        p1_0.publish_date,\n" +
             "        p1_0.title \n" +
             "    from post p1_0 \n" +
             "    join category c1_0 \n" +
@@ -48,9 +48,9 @@ public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificat
     )
     Page<Post> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
-    List<Post> findAllByAccountId(Long userId);
+    Page<Post> findAllByAccountId(Long userId, Pageable pageable);
 
-    List<Post> findAllByCategoryId(Long categoryId);
+    Page<Post> findAllByCategoryId(Long categoryId,  Pageable pageable);
 
     List<Post> findByLink(String link);
 
